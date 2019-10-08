@@ -105,7 +105,13 @@ def get_xmp(fileobj):
 
     if xmp_start < xmp_end:
         xmp_str = img_str[xmp_start:xmp_end + 12]
-        xdict = x2d.parse(xmp_str)
+        try:
+            xdict = x2d.parse(xmp_str)
+        except Exception as ex:
+            # if file is binary opened XMPs are full of \n and \t that have to be stripped before parsing
+            xmp_str = xmp_str.replace('\\n', '')
+            xmp_str = xmp_str.replace('\\t', '')
+            xdict = x2d.parse(xmp_str)
         xdict = xdict.get('x:xmpmeta', {})
         xdict = xdict.get('rdf:RDF', {})
         xdict = xdict.get('rdf:Description', {})
