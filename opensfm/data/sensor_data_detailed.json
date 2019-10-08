@@ -10772,6 +10772,13 @@
         "Sensor": "23.6 x 15.8 mm", 
         "Sensor res. (height)": 3297.0
     }, 
+    "Micasense Altum": {
+        "Sensor height (mm)": 5.33, 
+        "Sensor width (mm)": 7.12, 
+        "Sensor res. (width)": 2064.0, 
+        "Sensor": "7.12 x 5.33 mm", 
+        "Sensor res. (height)": 1544.0
+    }, 
     "Minolta DiMAGE 2300": {
         "Sensor height (mm)": 5.64, 
         "Sensor width (mm)": 7.53, 

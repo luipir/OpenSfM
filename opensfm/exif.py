@@ -379,6 +379,20 @@ def hard_coded_calibration(exif):
             return {'focal': 0.55, 'k1': -0.30, 'k2': 0.08}
         elif 'hdr-as300' in model:
             return {"focal":  0.3958, "k1": -0.1496, "k2": 0.0201}
+    elif 'micasense' == make and 'altum' == model:
+        # statically get from XMP metadata:
+        # '{http://pix4d.com/camera/1.0}PerspectiveDistortion': {
+        #     '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Seq': {
+        #         '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}li': [
+        #             '-0.12705379999999999', '0.22419559999999999', '-0.1245735', '0.00035814560000000002', '0.0001770141'
+        #         ]
+        #     }
+        # },
+        # as reference in:
+        # https://github.com/micasense/imageprocessing/blob/master/micasense/image.py#L355
+        # dist_coeffs = np.array(k[0],k[1],p[0],p[1],k[2]])
+        # return np.array(self.distortion_parameters)[[0, 1, 3, 4, 2]]
+        return {'focal': focal, 'k1': -0.12705379999999999, 'k2': 0.22419559999999999, 'p1': 0.00035814560000000002,  'p2': 0.0001770141,  'k3': -0.1245735}
 
 
 def focal_ratio_calibration(exif):
