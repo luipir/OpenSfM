@@ -282,6 +282,10 @@ class EXIF:
     def extract_dop(self):
         if 'GPS GPSDOP' in self.tags:
             dop = eval_frac(self.tags['GPS GPSDOP'].values[0])
+            # sometimes metadata have DOP set to 0 generating
+            # localization error => better evoid propagating this value
+            # and use GPS precision.
+            dop = dop if dop > 0 else None
         else:
             dop = None
         return dop
